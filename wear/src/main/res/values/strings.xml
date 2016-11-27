@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MultiChoiceModule</string>
+    <string name="hello">Hello World!</string>
+    <string name="title">Hello Notification!</string>
+    <string name="notification_posted">Notification posted</string>
+    <string name="some_text">Some Text</string>
+    <string name="title_activity_options_response">OptionsResponseActivity</string>
+    <string name="hello_round">Hello Round World!</string>
+    <string name="hello_square">Hello Square World!</string>
+    <string name="will_arrive">The student will arrive to the school?</string>
+    <string name="msg_sent">Response Sent</string>
+</resources>
