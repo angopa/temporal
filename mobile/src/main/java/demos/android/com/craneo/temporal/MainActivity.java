@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private Button bMultChoice;
     private Button bAlert;
     private Button bWearableApp;
+    private Button bSettings;
 
     private static final String TAG = "MainActivity";
     private Kid kid;
@@ -88,11 +89,13 @@ public class MainActivity extends AppCompatActivity
         bMultChoice = (Button) findViewById(R.id.sentChoice);
         bAlert = (Button) findViewById(R.id.sentAlert);
         bWearableApp = (Button) findViewById(R.id.launchWearableApp);
+        bSettings = (Button) findViewById(R.id.settings);
 
         bSendNotf.setOnClickListener(this);
         bMultChoice.setOnClickListener(this);
         bAlert.setOnClickListener(this);
         bWearableApp.setOnClickListener(this);
+        bSettings.setOnClickListener(this);
     }
 
     @Override
@@ -159,7 +162,10 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.launchWearableApp:
                 WearService.startService(this);
-                Toast.makeText(this, "Launch Wearable App", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.settings:
+                intent = new Intent(this, SettingActivity.class);
+                startActivity(intent);
                 break;
 
         }
