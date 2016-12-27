@@ -1,4 +1,4 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.receiver;
 
 import android.content.Intent;
 import android.util.Log;
@@ -9,9 +9,9 @@ import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
 
-/**
- * Created by crane on 10/26/2016.
- */
+
+import demos.android.com.craneo.temporal.ui.MyDisplayActivity;
+import demos.android.com.craneo.temporal.util.Constants;
 
 public class DataLayerListenerService extends WearableListenerService {
     private static final String TAG = "DataLayer";
@@ -26,8 +26,6 @@ public class DataLayerListenerService extends WearableListenerService {
                     && Constants.DATA_ITEM_RECEIVE_PATH.equals(event.getDataItem().getUri().getPath())) {
 
                 DataMapItem dataMapItem = DataMapItem.fromDataItem(event.getDataItem());
-
-//                showNotification(dataMapItem.getUri(), attractionsData);
             }
         }
     }
@@ -36,6 +34,5 @@ public class DataLayerListenerService extends WearableListenerService {
     public void onMessageReceived(MessageEvent messageEvent) {
         Intent intent = new Intent(this, MyDisplayActivity.class);
         startActivity(intent);
-        Log.v(TAG, "onMessageReceived: " + messageEvent);
     }
 }
