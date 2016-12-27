@@ -1,4 +1,4 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.utils;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -24,6 +24,10 @@ import com.google.android.gms.wearable.Wearable;
 
 import java.util.List;
 
+import demos.android.com.craneo.temporal.R;
+import demos.android.com.craneo.temporal.receiver.ReplyActivity;
+import demos.android.com.craneo.temporal.beans.Kid;
+
 /**
  * Created by crane on 10/20/2016.
  */
@@ -45,7 +49,7 @@ public class SendNotification
     private Bitmap kidImage;
 
     public SendNotification(Context context,
-                             View view, Kid student, String message, boolean isNormal){
+                            View view, Kid student, String message, boolean isNormal){
         this.context = context;
         this.view = view;
         this.message = message;
@@ -201,11 +205,11 @@ public class SendNotification
 
     @Override
     public void onConnectionSuspended(int i) {
-
+        //This method was left blank intentionally
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        //This method was left blank intentionally
     }
 }

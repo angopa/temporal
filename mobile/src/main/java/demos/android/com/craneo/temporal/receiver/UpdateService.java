@@ -1,4 +1,4 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.receiver;
 
 import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;

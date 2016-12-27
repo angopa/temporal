@@ -1,4 +1,4 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.receiver;
 
 import android.util.Log;
 

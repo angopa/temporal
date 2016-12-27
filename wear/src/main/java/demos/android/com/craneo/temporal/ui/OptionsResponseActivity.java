@@ -1,4 +1,4 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.wearable.activity.ConfirmationActivity;
 import android.support.wearable.view.WearableListView;
 import android.util.Log;
+
+import demos.android.com.craneo.temporal.R;
+import demos.android.com.craneo.temporal.service.UtilityService;
 
 public class OptionsResponseActivity extends Activity implements
         WearableListView.ClickListener{

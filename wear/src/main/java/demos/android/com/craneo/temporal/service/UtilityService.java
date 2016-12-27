@@ -1,4 +1,4 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.service;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -13,35 +13,48 @@ import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
+import demos.android.com.craneo.temporal.util.Constants;
+
 /**
- * Created by crane on 11/27/2016.
+ * Created by crane on 10/26/2016.
  */
 
-public class WearService extends IntentService {
+public class UtilityService extends IntentService {
+    private static final String TAG = "UtilityService";
+    private static Integer option = 0;
+    private static Context mContext;
+    private static final String ACTION_START_DEVICE_ACTIVITY = "start_device_activity";
 
-    private static final String TAG = WearService.class.getSimpleName();
-
-    public WearService() {
+    public UtilityService() {
         super(TAG);
     }
 
-    public static void startService(Context context){
-        Intent intent = new Intent(context, WearService.class);
-        context.startService(intent);
+    public UtilityService(Context context, Integer option){
+        this();
+        this.mContext = context;
+        this.option = option;
+    }
+
+    /**
+     * Trigger a message that asks the master device to start an activity.
+     */
+    public static void startDeviceActivity() {
+        Intent intent = new Intent(mContext, UtilityService.class);
+        intent.setAction(ACTION_START_DEVICE_ACTIVITY);
+        mContext.startService(intent);
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        sendMessage();
+        String action = intent != null ? intent.getAction() : null;
+        if (ACTION_START_DEVICE_ACTIVITY.equals(action)) {
+            sendDataToHandler();
+        }
     }
 
-    /**
-     * Transfer the required data over to the wearable
-     */
-    private void sendDataToWearable() {
+    private void sendDataToHandler() {
         GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Wearable.API)
                 .build();
@@ -52,8 +65,9 @@ public class WearService extends IntentService {
 
 
         if (connectionResult.isSuccess() && googleApiClient.isConnected()) {
-            PutDataMapRequest dataMap = PutDataMapRequest.create(Constants.DATA_ITEM_RECEIVE_PATH);
-            dataMap.getDataMap().putString(Constants.USE_MICRO_APP, "open");
+            PutDataMapRequest dataMap = PutDataMapRequest.create(
+                    Constants.ACTIVITY_PATH);
+            dataMap.getDataMap().putInt(Constants.CHOICE_OPTION, option);
             dataMap.getDataMap().putLong(Constants.EXTRA_TIMESTAMP, new Date().getTime());
             PutDataRequest request = dataMap.asPutDataRequest();
             request.setUrgent();
@@ -62,7 +76,7 @@ public class WearService extends IntentService {
             DataApi.DataItemResult result =
                     Wearable.DataApi.putDataItem(googleApiClient, request).await();
             if (result.getStatus().isSuccess()) {
-                Log.e(TAG, String.format("Send data using DataApi (error code = %d)",
+                Log.d(TAG, String.format("Send data using DataApi (code = %d)",
                         result.getStatus().getStatusCode()));
             }else {
                 Log.e(TAG, String.format("Error sending data using DataApi (error code = %d)",
@@ -73,25 +87,5 @@ public class WearService extends IntentService {
                     connectionResult.getErrorCode()));
         }
         googleApiClient.disconnect();
-    }
-
-    private void sendMessage(){
-
-        GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Wearable.API)
-                .build();
-
-        ConnectionResult connectionResult = googleApiClient.blockingConnect(
-                Constants.GOOGLE_API_CLIENT_TIMEOUT_S, TimeUnit.SECONDS);
-
-        if (connectionResult.isSuccess() && googleApiClient.isConnected()) {
-            // Loop through all nodes and send a clear notification message
-            Iterator<String> itr = Utils.getNodes(googleApiClient).iterator();
-            while (itr.hasNext()) {
-                Wearable.MessageApi.sendMessage(
-                        googleApiClient, itr.next(), Constants.ACTIVITY_PATH, null);
-            }
-            googleApiClient.disconnect();
-        }
     }
 }

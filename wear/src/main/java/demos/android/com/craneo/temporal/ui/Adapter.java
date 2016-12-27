@@ -1,17 +1,13 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.ui;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.support.wearable.view.WearableListView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
-/**
- * Created by crane on 11/2/2016.
- */
+import demos.android.com.craneo.temporal.R;
 
 public class Adapter extends WearableListView.Adapter {
     private String[] mDataset;

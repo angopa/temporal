@@ -1,4 +1,4 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.ui;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
@@ -8,9 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * Created by crane on 11/1/2016.
- */
+import demos.android.com.craneo.temporal.R;
 
 public class WearableListItemLayout extends LinearLayout
         implements WearableListView.OnCenterProximityListener {

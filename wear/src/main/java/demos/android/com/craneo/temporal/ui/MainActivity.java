@@ -1,9 +1,8 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.ui;
 
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,8 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import demos.android.com.craneo.temporal.R;
+import demos.android.com.craneo.temporal.service.UtilityService;
+
 public class MainActivity extends WearableActivity {
-    private static final String TAG = "MainActivity";
     private static final SimpleDateFormat AMBIENT_DATE_FORMAT =
             new SimpleDateFormat("HH:mm", Locale.US);
 

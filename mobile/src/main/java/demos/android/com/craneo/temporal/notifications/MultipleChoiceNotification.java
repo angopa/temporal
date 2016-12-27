@@ -1,4 +1,4 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.notifications;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,15 +7,12 @@ import android.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by crane on 10/24/2016.
- */
-
 public class MultipleChoiceNotification {
     public static final String WEARABLE_CHOICE_MESSAGE = "wearable_choice_message";
     public static final String WEARABLE_OPTION_A = "wearable_option_a";
     public static final String WEARABLE_OPTION_B = "wearable_option_b";
     public static final String WEARABLE_OPTION_C = "wearable_option_c";
+
     private SharedPreferences settings;
     private static List<String> prefMessages;
     private static String prefMessage;

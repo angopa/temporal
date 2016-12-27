@@ -1,13 +1,15 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.wearable.activity.ConfirmationActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import demos.android.com.craneo.temporal.R;
+import demos.android.com.craneo.temporal.ui.OptionsResponseActivity;
 
 public class MyDisplayActivity extends Activity implements View.OnClickListener{
 

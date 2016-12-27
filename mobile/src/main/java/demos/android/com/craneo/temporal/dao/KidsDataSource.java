@@ -1,23 +1,21 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import demos.android.com.craneo.temporal.beans.Kid;
 
 /**
  * Created by crane on 10/22/2016.
  */
 
 public class KidsDataSource {
-
-    private static final String TAG = "KidsDataSource";
-
     SQLiteOpenHelper dbHelper;
     SQLiteDatabase database;
 
@@ -32,12 +30,10 @@ public class KidsDataSource {
     }
 
     public void open(){
-        Log.i(TAG, "Database opened");
         database = dbHelper.getWritableDatabase();
     }
 
     public void close(){
-        Log.i(TAG, "Database closed");
         dbHelper.close();
     }
 
@@ -55,7 +51,7 @@ public class KidsDataSource {
         List<Kid> kids = new ArrayList<>();
         Cursor cursor = database.query(KidsDBOpenHelper.TABLE_NAME, allColums,
                 null, null, null, null, null);
-        Log.i(TAG, "Returned "+ cursor.getCount()+" rows");
+
         if (cursor.getCount() > 0){
             while(cursor.moveToNext()){
                 Kid kid = new Kid();
@@ -63,7 +59,6 @@ public class KidsDataSource {
                 kid.setName(cursor.getString(cursor.getColumnIndex(KidsDBOpenHelper.COLUMN_NAME)));
                 kid.setLastName(cursor.getString(cursor.getColumnIndex(KidsDBOpenHelper.COLUMN_LASTNAME)));
                 kid.setImage(cursor.getString(cursor.getColumnIndex(KidsDBOpenHelper.COLUMN_IMAGE)));
-                Log.d(TAG, kid.getImage());
                 kids.add(kid);
             }
         }

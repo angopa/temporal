@@ -1,12 +1,8 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.notifications;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
-/**
- * Created by crane on 10/24/2016.
- */
 
 public class AlertNotification {
     public static final String WEARABLE_SHORT_ALERT = "wearable_short_alert";

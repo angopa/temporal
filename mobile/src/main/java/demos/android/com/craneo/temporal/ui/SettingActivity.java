@@ -1,28 +1,22 @@
-package demos.android.com.craneo.temporal;
+package demos.android.com.craneo.temporal.ui;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
 import android.support.v7.app.ActionBar;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.List;
 
-/**
- * Created by crane on 10/19/2016.
- */
+import demos.android.com.craneo.temporal.AppCompatPreferencesActivity;
+import demos.android.com.craneo.temporal.R;
 
 public class SettingActivity extends AppCompatPreferencesActivity {
     /**
@@ -47,24 +41,6 @@ public class SettingActivity extends AppCompatPreferencesActivity {
                         index >= 0
                                 ?listPreference.getEntries()[index]
                                 :null);
-            }else if(preference instanceof RingtonePreference){
-                //For ringtone preferences, look up the correct display value using RingtoneManager
-                if(TextUtils.isEmpty(stringValue)){
-                    //Empty values correspond to silent
-                    preference.setSummary("Silent");
-                }else{
-                    Ringtone ringtone = RingtoneManager.getRingtone(
-                            preference.getContext(), Uri.parse(stringValue));
-
-                    if (ringtone == null){
-                        //Clear the summary if there was a looking error.
-                        preference.setSummary(null);
-                    }else{
-                        //Set the Summary to reflec the new ringtone display name
-                        String name = ringtone.getTitle(preference.getContext());
-                        preference.setSummary(name);
-                    }
-                }
             }else{
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
@@ -99,7 +75,6 @@ public class SettingActivity extends AppCompatPreferencesActivity {
                 PreferenceManager
                         .getDefaultSharedPreferences(preference.getContext())
                         .getString(preference.getKey(), ""));
-
     }
 
     @Override
@@ -142,9 +117,6 @@ public class SettingActivity extends AppCompatPreferencesActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -167,7 +139,6 @@ public class SettingActivity extends AppCompatPreferencesActivity {
                 || SettingActivity.QuestionNotificationFragment.class.getName().equals(fragmentName)
                 || SettingActivity.AlertNotificationFragment.class.getName().equals(fragmentName);
     }
-
 
     /**
      * This fragment shows the notification preferences only. It is used when the
